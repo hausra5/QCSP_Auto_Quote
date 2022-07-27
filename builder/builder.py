@@ -6,7 +6,7 @@ from write.write_quote import write_quote
 
 class builder:
     def __init__(self):
-# Create Customer Info Window
+        # Create Customer Info Window
         self.CA = customer_app()
         self.CA.mainloop()
 
@@ -19,7 +19,6 @@ class builder:
 
         try:
             os.makedirs(os.path.join("running_quotes",self.customer.name))
-            #os.mkdirs('running_quotes/'+self.customer.name)
         except:
            pass
 
@@ -33,6 +32,3 @@ class builder:
         # Save Output and Dataframe
         self.wq.write_quote_info(self.QA)
         self.wq.write_dataframe()
-
-# if __name__ == '__main__':
-#     builder()
