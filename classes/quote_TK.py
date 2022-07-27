@@ -226,71 +226,31 @@ class quote_app(tk.Tk):
     def submit(self):
         self.count += 1
         self.due_date = self.due_date_qa.get()
-        self.shirt_style_sub = self.shirt_style.get()
-        self.quantity_break_sub = self.quantity_break.get()
-        self.s_xl_q_sub = self.s_xl_q.get()
-        self.xxl_q_sub = self.xxl_q.get()
-        self.xxxl_q_sub = self.xxxl_q.get()
-        self.xxxxl_q_sub = self.xxxxl_q.get()
-        self.xxxxxl_q_sub = self.xxxxxl_q.get()
-        self.location1_sub = self.location1.get()
-        self.location2_sub = self.location2.get()
-        self.location3_sub = self.location3.get()
-        self.location4_sub = self.location4.get()
-        self.description_sub = self.description.get()
-        self.override_front_sub = self.override_front.get()
-        self.override_addl_sub = self.override_addl.get()
-        self.upcharge_sub = self.upcharge.get()
-        self.tax_sub = self.tax.get()
-        self.s_xl_blank_sub = self.s_xl_blank.get()
-        self.xxl_blank_sub = self.xxl_blank.get()
-        self.xxxl_blank_sub = self.xxxl_blank.get()
-        self.xxxxl_blank_sub = self.xxxxl_blank.get()
-        self.xxxxxl_blank_sub = self.xxxxxl_blank.get()
-        self.quote_name_sub = self.quote_name.get()
 
-        customer_name = self.customer_class.name
-        customer_email = self.customer_class.email
-        customer_phone = self.customer_class.phone
-        customer_address = self.customer_class.address
-        shirt_style_auto = self.shirt_style_sub
-        quantity_break_auto = int(self.quantity_break_sub)
-        SXLQ = int(self.s_xl_q_sub)
-        XXLQ = int(self.xxl_q_sub)
-        XXXLQ = int(self.xxxl_q_sub)
-        XXXXLQ = int(self.xxxxl_q_sub)
-        XXXXXLQ = int(self.xxxxxl_q_sub)
-        quantity_dict_auto = {'S-XL': SXLQ, 'XXL': XXLQ, 'XXXL': XXXLQ, 'XXXXL': XXXXLQ, 'XXXXXL': XXXXXLQ}
-        location1_auto = int(self.location1_sub)
-        location2_auto = int(self.location2_sub)
-        location3_auto = int(self.location3_sub)
-        location4_auto = int(self.location4_sub)
-        override_front_auto = float(self.override_front_sub)
-        override_additional_auto = float(self.override_addl_sub)
-        upcharge_auto = float(self.upcharge_sub)
-        tax_auto = float(self.tax_sub)
-        shirt_price_auto = float(self.s_xl_blank_sub)
-        XXL_auto = float(self.xxl_blank_sub)
-        XXXL_auto = float(self.xxxl_blank_sub)
-        XXXXL_auto = float(self.xxxxl_blank_sub)
-        XXXXXL_auto = float(self.xxxxxl_blank_sub)
+        quantity_dict_auto = {'S-XL': int(self.s_xl_q.get()), 'XXL': int(self.xxl_q.get()),
+                              'XXXL': int(self.xxxl_q.get()),
+                              'XXXXL': int(self.xxxxl_q.get()), 'XXXXXL': int(self.xxxxxl_q.get())}
 
-        quote_info = Quote_info(name=customer_name, email=customer_email, phone=customer_phone,
-                                address=customer_address,
-                                due_date=self.due_date, shirt_style=shirt_style_auto, shirt_price=shirt_price_auto,
-                                quantity_break=quantity_break_auto,
-                                location1=location1_auto, location2=location2_auto, location3=location3_auto,
-                                location4=location4_auto,
-                                description=self.description_sub, override_front=override_front_auto,
-                                override_additional=override_additional_auto,
-                                upcharge=upcharge_auto, tax=tax_auto,
-                                XXL=XXL_auto, XXXL=XXXL_auto, XXXXL=XXXXL_auto, XXXXXL=XXXXXL_auto,
-                                quantity_dict=quantity_dict_auto)
+        quote_info = Quote_info(name=self.customer_class.name, email=self.customer_class.email,
+                                phone=self.customer_class.phone, address=self.customer_class.address,
+                                due_date=self.due_date, shirt_style=self.shirt_style.get(),
+                                shirt_price=float(self.s_xl_blank.get()),
+                                quantity_break=int(self.quantity_break.get()),
+                                location1=int(self.location1.get()), location2=int(self.location2.get()),
+                                location3=int(self.location3.get()), location4=int(self.location4.get()),
+                                description=self.description.get(), override_front=float(self.override_front.get()),
+                                override_additional=float(self.override_addl.get()),
+                                upcharge=float(self.upcharge.get()),
+                                tax=float(self.tax.get()), XXL=float(self.xxl_blank.get()),
+                                XXXL=float(self.xxxl_blank.get()), XXXXL=float(self.xxxxl_blank.get()),
+                                XXXXXL=float(self.xxxxxl_blank.get()), quantity_dict=quantity_dict_auto)
+
         grand_total, profit, actual_quote = quote_info.run_quote()
-        quote_info.print_quote(actual_quote, save=True, file_name=self.df_name + '_quote', dir='running_quotes/'+customer_name)
+        quote_info.print_quote(actual_quote, save=True, file_name=self.df_name + '_quote',
+                               dir='running_quotes/' + self.customer_class.name)
         self.total.append(grand_total)
         self.total_profit.append(profit)
-        self.customer_class.add_quote(self.quote_name_sub, actual_quote)
+        self.customer_class.add_quote(self.quote_name.get(), actual_quote)
 
         self.shirt_style.set("")
         self.quantity_break.set("72")
