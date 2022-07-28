@@ -158,7 +158,7 @@ class quote_app(tk.Tk):
         upcharge_entry.grid(row=16, column=1)
 
         self.tax = tk.StringVar()
-        tax_label = tk.Label(self, text='Tax Price', font=('calibre', 12, 'bold'))
+        tax_label = tk.Label(self, text='Tax Price (NC = .0725)', font=('calibre', 12, 'bold'))
         tax_label.grid(row=17, column=0)
         tax_entry = tk.Entry(self, textvariable=self.tax, font=('calibre', 12, 'normal'), width=27)
         tax_entry.grid(row=17, column=1)
