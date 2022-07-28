@@ -246,7 +246,7 @@ class quote_app(tk.Tk):
                                 XXXXXL=float(self.xxxxxl_blank.get()), quantity_dict=quantity_dict_auto)
 
         grand_total, profit, actual_quote = quote_info.run_quote()
-        quote_info.print_quote(actual_quote, save=True, file_name=self.df_name + '_quote',
+        quote_info.print_quote(actual_quote, file_name=self.df_name + '_quote',
                                dir='running_quotes/' + self.customer_class.name)
         self.total.append(grand_total)
         self.total_profit.append(profit)

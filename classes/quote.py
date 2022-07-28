@@ -57,7 +57,7 @@ class Quote_info(Customer):
                                               (quote_dict['XXXXL_price'] * quote_dict['sizes']['XXXXL']) +
                                               (quote_dict['XXXXXL_price'] * quote_dict['sizes']['XXXXXL']),2)
 
-        def quote_dict_totals():
+        def quote_dict_totals(locations=1):
             quote_dict['tax_total'] = round(
                 self.tax * (((quote_dict['total_S-XL_price']) * quote_dict['sizes']['S-XL']) +
                             (quote_dict['total_XXL_price'] * quote_dict['sizes']['XXL']) +
@@ -72,8 +72,8 @@ class Quote_info(Customer):
                                               (quote_dict['tax_total']), 2)
 
             quote_dict['shirt_lizard_cost'] = round(
-                ((quote_dict['quantity'] * 2) * quote_dict['shirt_lizard_price_per_shirt']) +
-                ((self.location1 + self.location2) * quote_dict['shirt_lizard_screen_charge']), 2)
+                ((quote_dict['quantity'] * locations) * quote_dict['shirt_lizard_price_per_shirt']) +
+                ((self.location1 + self.location2 + self.location3 + self.location4) * quote_dict['shirt_lizard_screen_charge']), 2)
             quote_dict['profit'] = round(
                 quote_dict['grand_total'] - quote_dict['total_blank_cost'] - quote_dict['shirt_lizard_cost'], 2)
 
@@ -97,7 +97,7 @@ class Quote_info(Customer):
             quote_dict['total_XXXXXL_price'] = round(quote_dict['front_price'] + quote_dict['addl2'] + quote_dict['XXXXXL_price'],2)
 
             quote_dict['tax_total'], quote_dict['grand_total'], \
-            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals()
+            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals(locations=2)
 
             return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
@@ -116,7 +116,7 @@ class Quote_info(Customer):
             quote_dict['total_XXXXXL_price'] = round(quote_dict['front_price'] + quote_dict['addl2'] + quote_dict['addl3'] + quote_dict['XXXXXL_price'],2)
 
             quote_dict['tax_total'], quote_dict['grand_total'], \
-            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals()
+            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals(locations=3)
 
             return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
@@ -137,7 +137,7 @@ class Quote_info(Customer):
             quote_dict['total_XXXXXL_price'] = round(quote_dict['front_price'] + quote_dict['addl2'] + quote_dict['addl3'] + quote_dict['addl4'] + quote_dict['XXXXXL_price'],2)
 
             quote_dict['tax_total'], quote_dict['grand_total'], \
-            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals()
+            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals(locations=4)
 
             return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
@@ -152,31 +152,30 @@ class Quote_info(Customer):
 
         return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
-    #@staticmethod
-    def print_quote(self, actual_quote, save = False, file_name = None, dir = None):
-        if save == False:
+    def print_quote(self, actual_quote, file_name = None, dir = None):
+        with open(dir+'/'+file_name, "a") as f:
             if self.description:
-                print('Design: ',self.description)
+                print('Design: ', self.description, file = f)
             if self.location2 != 0 and self.location3 == 0 and self.location4 == 0:
                 print(
                     '{} Quantity - {} - {}/{} Color Print'.format(self.quantity, self.shirt_style,
-                                                                  self.location1, self.location2))
+                                                                  self.location1, self.location2), file = f)
 
             elif self.location2 != 0 and self.location3 != 0 and self.location4 == 0:
                 print(
                     '{} Quantity - {} - {}/{}/{} Color Print'.format(self.quantity, self.shirt_style,
-                                                                  self.location1, self.location2,
-                                                                  self.location3))
+                                                                     self.location1, self.location2,
+                                                                     self.location3), file = f)
 
             elif self.location2 != 0 and self.location3 != 0 and self.location4 != 0:
                 print(
                     '{} Quantity - {} - {}/{}/{}/{} Color Print'.format(self.quantity, self.shirt_style,
-                                                                  self.location1, self.location2,
-                                                                  self.location3, self.location4))
+                                                                        self.location1, self.location2,
+                                                                        self.location3, self.location4), file = f)
             else:
                 print(
                     '{} Quantity - {} - {} Color Print'.format(self.quantity, self.shirt_style,
-                                                                  self.location1))
+                                                               self.location1), file = f)
 
             if actual_quote['tax_total'] == 0:
 
@@ -186,7 +185,7 @@ class Quote_info(Customer):
                       '4XL price per shirt: $', actual_quote['total_XXXXL_price'], '\n',
                       '5XL price per shirt: $', actual_quote['total_XXXXXL_price'], '\n',
                       'Total Tax: EXEMPT', '\n',
-                      'Grand Total Quote: $', actual_quote['grand_total'])
+                      'Grand Total Quote: $', actual_quote['grand_total'], file = f)
             else:
                 print(' S-XL price per shirt: $', actual_quote['total_S-XL_price'], '\n',
                       '2XL price per shirt: $', actual_quote['total_XXL_price'], '\n',
@@ -194,48 +193,5 @@ class Quote_info(Customer):
                       '4XL price per shirt: $', actual_quote['total_XXXXL_price'], '\n',
                       '5XL price per shirt: $', actual_quote['total_XXXXXL_price'], '\n',
                       'Total Tax: ', actual_quote['tax_total'], '\n',
-                      'Grand Total Quote: $', actual_quote['grand_total'])
-            print('-' * 30)
-        else:
-            with open(dir+'/'+file_name, "a") as f:
-                if self.description:
-                    print('Design: ', self.description, file = f)
-                if self.location2 != 0 and self.location3 == 0 and self.location4 == 0:
-                    print(
-                        '{} Quantity - {} - {}/{} Color Print'.format(self.quantity, self.shirt_style,
-                                                                      self.location1, self.location2), file = f)
-
-                elif self.location2 != 0 and self.location3 != 0 and self.location4 == 0:
-                    print(
-                        '{} Quantity - {} - {}/{}/{} Color Print'.format(self.quantity, self.shirt_style,
-                                                                         self.location1, self.location2,
-                                                                         self.location3), file = f)
-
-                elif self.location2 != 0 and self.location3 != 0 and self.location4 != 0:
-                    print(
-                        '{} Quantity - {} - {}/{}/{}/{} Color Print'.format(self.quantity, self.shirt_style,
-                                                                            self.location1, self.location2,
-                                                                            self.location3, self.location4), file = f)
-                else:
-                    print(
-                        '{} Quantity - {} - {} Color Print'.format(self.quantity, self.shirt_style,
-                                                                   self.location1), file = f)
-
-                if actual_quote['tax_total'] == 0:
-
-                    print(' S-XL price per shirt: $', actual_quote['total_S-XL_price'], '\n',
-                          '2XL price per shirt: $', actual_quote['total_XXL_price'], '\n',
-                          '3XL price per shirt: $', actual_quote['total_XXXL_price'], '\n',
-                          '4XL price per shirt: $', actual_quote['total_XXXXL_price'], '\n',
-                          '5XL price per shirt: $', actual_quote['total_XXXXXL_price'], '\n',
-                          'Total Tax: EXEMPT', '\n',
-                          'Grand Total Quote: $', actual_quote['grand_total'], file = f)
-                else:
-                    print(' S-XL price per shirt: $', actual_quote['total_S-XL_price'], '\n',
-                          '2XL price per shirt: $', actual_quote['total_XXL_price'], '\n',
-                          '3XL price per shirt: $', actual_quote['total_XXXL_price'], '\n',
-                          '4XL price per shirt: $', actual_quote['total_XXXXL_price'], '\n',
-                          '5XL price per shirt: $', actual_quote['total_XXXXXL_price'], '\n',
-                          'Total Tax: ', actual_quote['tax_total'], '\n',
-                          'Grand Total Quote: $', actual_quote['grand_total'], file = f)
-                print('-' * 30, file = f)
+                      'Grand Total Quote: $', actual_quote['grand_total'], file = f)
+            print('-' * 30, file = f)
