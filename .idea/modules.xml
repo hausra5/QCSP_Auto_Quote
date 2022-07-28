@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/QCSP_Auto_Quote.iml" filepath="$PROJECT_DIR$/.idea/QCSP_Auto_Quote.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/QCSP-QUOTE-GENERATOR.iml" filepath="$PROJECT_DIR$/.idea/QCSP-QUOTE-GENERATOR.iml" />
     </modules>
   </component>
 </project>
