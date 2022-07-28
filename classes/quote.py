@@ -94,11 +94,7 @@ class Quote_info(Customer):
             quote_dict['profit'] = round(
                 quote_dict['grand_total'] - quote_dict['total_blank_cost'] - quote_dict['shirt_lizard_cost'], 2)
 
-            return quote_dict['total_S-XL_price'], quote_dict['total_XXL_price'], \
-                   quote_dict['total_XXXL_price'], quote_dict['total_XXXXL_price'], \
-                   quote_dict['total_XXXXXL_price'], \
-                   quote_dict['tax_total'], quote_dict['grand_total'], \
-                   quote_dict['shirt_lizard_cost'], quote_dict['profit']
+            return quote_dict
 
         if self.override_front != 0:
             quote_dict['front_price'] = round(float(self.override_front + self.upcharge),2)
@@ -111,11 +107,7 @@ class Quote_info(Customer):
             else:
                 quote_dict['addl2'] = float(addl[addl['Colors'] == self.location2][self.quantity_break].values[0].replace('$', ''))
 
-            quote_dict['total_S-XL_price'], quote_dict['total_XXL_price'], \
-            quote_dict['total_XXXL_price'], quote_dict['total_XXXXL_price'], \
-            quote_dict['total_XXXXXL_price'], \
-            quote_dict['tax_total'], quote_dict['grand_total'], \
-            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals(addl2 = quote_dict['addl2'], locations = 2)
+            quote_dict = quote_dict_totals(addl2 = quote_dict['addl2'], locations = 2)
 
             return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
@@ -127,13 +119,7 @@ class Quote_info(Customer):
                 quote_dict['addl2'] = float(addl[addl['Colors'] == self.location2][self.quantity_break].values[0].replace('$', ''))
                 quote_dict['addl3'] = float(addl[addl['Colors'] == self.location3][self.quantity_break].values[0].replace('$', ''))
 
-            quote_dict['total_S-XL_price'], quote_dict['total_XXL_price'], \
-            quote_dict['total_XXXL_price'], quote_dict['total_XXXXL_price'], \
-            quote_dict['total_XXXXXL_price'], \
-            quote_dict['tax_total'], quote_dict['grand_total'], \
-            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals(addl2=quote_dict['addl2'],
-                                                                                      addl3=quote_dict['addl3'],
-                                                                                      locations=3)
+            quote_dict = quote_dict_totals(addl2=quote_dict['addl2'], addl3=quote_dict['addl3'],locations=3)
 
             return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
@@ -147,22 +133,12 @@ class Quote_info(Customer):
                 quote_dict['addl3'] = float(addl[addl['Colors'] == self.location3][self.quantity_break].values[0].replace('$', ''))
                 quote_dict['addl4'] = float(addl[addl['Colors'] == self.location4][self.quantity_break].values[0].replace('$', ''))
 
-            quote_dict['total_S-XL_price'], quote_dict['total_XXL_price'], \
-            quote_dict['total_XXXL_price'], quote_dict['total_XXXXL_price'], \
-            quote_dict['total_XXXXXL_price'], \
-            quote_dict['tax_total'], quote_dict['grand_total'], \
-            quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals(addl2=quote_dict['addl2'],
-                                                                                      addl3=quote_dict['addl3'],
-                                                                                      addl4=quote_dict['addl4'],
-                                                                                      locations=4)
+            quote_dict = quote_dict_totals(addl2=quote_dict['addl2'],addl3=quote_dict['addl3'],
+                                           addl4=quote_dict['addl4'],locations=4)
 
             return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
-        quote_dict['total_S-XL_price'], quote_dict['total_XXL_price'], \
-        quote_dict['total_XXXL_price'], quote_dict['total_XXXXL_price'], \
-        quote_dict['total_XXXXXL_price'], \
-        quote_dict['tax_total'], quote_dict['grand_total'], \
-        quote_dict['shirt_lizard_cost'], quote_dict['profit'] = quote_dict_totals()
+        quote_dict = quote_dict_totals()
 
         return quote_dict['grand_total'], quote_dict['profit'], quote_dict
 
