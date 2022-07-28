@@ -192,20 +192,15 @@ class Quote_info(Customer):
                                                                self.location1), file = f)
 
             if actual_quote['tax_total'] == 0:
-
-                print(' S-XL price per shirt: $', actual_quote['total_S-XL_price'], '\n',
-                      '2XL price per shirt: $', actual_quote['total_XXL_price'], '\n',
-                      '3XL price per shirt: $', actual_quote['total_XXXL_price'], '\n',
-                      '4XL price per shirt: $', actual_quote['total_XXXXL_price'], '\n',
-                      '5XL price per shirt: $', actual_quote['total_XXXXXL_price'], '\n',
-                      'Total Tax: EXEMPT', '\n',
-                      'Grand Total Quote: $', actual_quote['grand_total'], file = f)
+                tax = 'EXEMPT'
             else:
-                print(' S-XL price per shirt: $', actual_quote['total_S-XL_price'], '\n',
-                      '2XL price per shirt: $', actual_quote['total_XXL_price'], '\n',
-                      '3XL price per shirt: $', actual_quote['total_XXXL_price'], '\n',
-                      '4XL price per shirt: $', actual_quote['total_XXXXL_price'], '\n',
-                      '5XL price per shirt: $', actual_quote['total_XXXXXL_price'], '\n',
-                      'Total Tax: ', actual_quote['tax_total'], '\n',
-                      'Grand Total Quote: $', actual_quote['grand_total'], file = f)
+                tax = actual_quote['tax_total']
+
+            print(' S-XL price per shirt: $', actual_quote['total_S-XL_price'], '\n',
+                  '2XL price per shirt: $', actual_quote['total_XXL_price'], '\n',
+                  '3XL price per shirt: $', actual_quote['total_XXXL_price'], '\n',
+                  '4XL price per shirt: $', actual_quote['total_XXXXL_price'], '\n',
+                  '5XL price per shirt: $', actual_quote['total_XXXXXL_price'], '\n',
+                  'Total Tax: {}'.format(tax), '\n',
+                  'Grand Total Quote: $', actual_quote['grand_total'], file = f)
             print('-' * 30, file = f)
