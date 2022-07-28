@@ -63,7 +63,6 @@ class quote_app(tk.Tk):
         shirt_style_entry.grid(row=2, column=1)
 
         self.quantity_break = tk.StringVar()
-        self.quantity_break.set("72")
         quantity_break_label = tk.Label(self, text='Quantity Break', font=('calibre', 12, 'bold'))
         quantity_break_label.grid(row=3, column=0)
         quantity_break_entry = ttk.Combobox(self, textvariable=self.quantity_break, font=('calibre', 12, 'bold'),
@@ -73,42 +72,36 @@ class quote_app(tk.Tk):
         quantity_break_entry.grid(row=3, column=1)
 
         self.s_xl_q = tk.StringVar()
-        self.s_xl_q.set("72")
         s_xl_q_label = tk.Label(self, text='S-XL Quantity', font=('calibre', 12, 'bold'))
         s_xl_q_label.grid(row=4, column=0)
         s_xl_q_entry = tk.Entry(self, textvariable=self.s_xl_q, font=('calibre', 12, 'normal'), width=27)
         s_xl_q_entry.grid(row=4, column=1)
 
         self.xxl_q = tk.StringVar()
-        self.xxl_q.set("0")
         xxl_q_label = tk.Label(self, text='2XL Quantity', font=('calibre', 12, 'bold'))
         xxl_q_label.grid(row=5, column=0)
         xxl_q_entry = tk.Entry(self, textvariable=self.xxl_q, font=('calibre', 12, 'normal'), width=27)
         xxl_q_entry.grid(row=5, column=1)
 
         self.xxxl_q = tk.StringVar()
-        self.xxxl_q.set("0")
         xxxl_q_label = tk.Label(self, text='3XL Quantity', font=('calibre', 12, 'bold'))
         xxxl_q_label.grid(row=6, column=0)
         xxxl_q_entry = tk.Entry(self, textvariable=self.xxxl_q, font=('calibre', 12, 'normal'), width=27)
         xxxl_q_entry.grid(row=6, column=1)
 
         self.xxxxl_q = tk.StringVar()
-        self.xxxxl_q.set("0")
         xxxxl_q_label = tk.Label(self, text='4XL Quantity', font=('calibre', 12, 'bold'))
         xxxxl_q_label.grid(row=7, column=0)
         xxxxl_q_entry = tk.Entry(self, textvariable=self.xxxxl_q, font=('calibre', 12, 'normal'), width=27)
         xxxxl_q_entry.grid(row=7, column=1)
 
         self.xxxxxl_q = tk.StringVar()
-        self.xxxxxl_q.set("0")
         xxxxxl_q_label = tk.Label(self, text='5XL Quantity', font=('calibre', 12, 'bold'))
         xxxxxl_q_label.grid(row=8, column=0)
         xxxxxl_q_entry = tk.Entry(self, textvariable=self.xxxxxl_q, font=('calibre', 12, 'normal'), width=27)
         xxxxxl_q_entry.grid(row=8, column=1)
 
         self.location1 = tk.StringVar()
-        self.location1.set("1")
         location1_label = tk.Label(self, text='Location 1 Colors', font=('calibre', 12, 'bold'))
         location1_label.grid(row=9, column=0)
         location1_entry = ttk.Combobox(self, textvariable=self.location1, font=('calibre', 12, 'bold'), width=27)
@@ -117,7 +110,6 @@ class quote_app(tk.Tk):
         location1_entry.grid(row=9, column=1)
 
         self.location2 = tk.StringVar()
-        self.location2.set("0")
         location2_label = tk.Label(self, text='Location 2 Colors', font=('calibre', 12, 'bold'))
         location2_label.grid(row=10, column=0)
         location2_entry = ttk.Combobox(self, textvariable=self.location2, font=('calibre', 12, 'bold'), width=27)
@@ -126,7 +118,6 @@ class quote_app(tk.Tk):
         location2_entry.grid(row=10, column=1)
 
         self.location3 = tk.StringVar()
-        self.location3.set("0")
         location3_label = tk.Label(self, text='Location 3 Colors', font=('calibre', 12, 'bold'))
         location3_label.grid(row=11, column=0)
         location3_entry = ttk.Combobox(self, textvariable=self.location3, font=('calibre', 12, 'bold'), width=27)
@@ -135,7 +126,6 @@ class quote_app(tk.Tk):
         location3_entry.grid(row=11, column=1)
 
         self.location4 = tk.StringVar()
-        self.location4.set("0")
         location4_label = tk.Label(self, text='Location 4 Colors', font=('calibre', 12, 'bold'))
         location4_label.grid(row=12, column=0)
         location4_entry = ttk.Combobox(self, textvariable=self.location4, font=('calibre', 12, 'bold'), width=27)
@@ -150,63 +140,54 @@ class quote_app(tk.Tk):
         description_entry.grid(row=13, column=1)
 
         self.override_front = tk.StringVar()
-        self.override_front.set("0")
         override_front_label = tk.Label(self, text='Override Front Price', font=('calibre', 12, 'bold'))
         override_front_label.grid(row=14, column=0)
         override_front_entry = tk.Entry(self, textvariable=self.override_front, font=('calibre', 12, 'normal'), width=27)
         override_front_entry.grid(row=14, column=1)
 
         self.override_addl = tk.StringVar()
-        self.override_addl.set("0")
         override_addl_label = tk.Label(self, text='Override Additional Location Price', font=('calibre', 12, 'bold'))
         override_addl_label.grid(row=15, column=0)
         override_addl_entry = tk.Entry(self, textvariable=self.override_addl, font=('calibre', 12, 'normal'), width=27)
         override_addl_entry.grid(row=15, column=1)
 
         self.upcharge = tk.StringVar()
-        self.upcharge.set("0")
         upcharge_label = tk.Label(self, text='Flat Upcharge Price', font=('calibre', 12, 'bold'))
         upcharge_label.grid(row=16, column=0)
         upcharge_entry = tk.Entry(self, textvariable=self.upcharge, font=('calibre', 12, 'normal'), width=27)
         upcharge_entry.grid(row=16, column=1)
 
         self.tax = tk.StringVar()
-        self.tax.set("0")
         tax_label = tk.Label(self, text='Tax Price', font=('calibre', 12, 'bold'))
         tax_label.grid(row=17, column=0)
         tax_entry = tk.Entry(self, textvariable=self.tax, font=('calibre', 12, 'normal'), width=27)
         tax_entry.grid(row=17, column=1)
 
         self.s_xl_blank = tk.StringVar()
-        self.s_xl_blank.set("0.00")
         s_xl_blank_label = tk.Label(self, text='S-XL Blank Price', font=('calibre', 12, 'bold'))
         s_xl_blank_label.grid(row=18, column=0)
         s_xl_blank_entry = tk.Entry(self, textvariable=self.s_xl_blank, font=('calibre', 12, 'normal'), width=27)
         s_xl_blank_entry.grid(row=18, column=1)
 
         self.xxl_blank = tk.StringVar()
-        self.xxl_blank.set("0.00")
         xxl_blank_label = tk.Label(self, text='2XL Blank Price', font=('calibre', 12, 'bold'))
         xxl_blank_label.grid(row=19, column=0)
         xxl_blank_entry = tk.Entry(self, textvariable=self.xxl_blank, font=('calibre', 12, 'normal'), width=27)
         xxl_blank_entry.grid(row=19, column=1)
 
         self.xxxl_blank = tk.StringVar()
-        self.xxxl_blank.set("0.00")
         xxxl_blank_label = tk.Label(self, text='3XL Blank Price', font=('calibre', 12, 'bold'))
         xxxl_blank_label.grid(row=20, column=0)
         xxxl_blank_entry = tk.Entry(self, textvariable=self.xxxl_blank, font=('calibre', 12, 'normal'), width=27)
         xxxl_blank_entry.grid(row=20, column=1)
 
         self.xxxxl_blank = tk.StringVar()
-        self.xxxxl_blank.set("0.00")
         xxxxl_blank_label = tk.Label(self, text='4XL Blank Price', font=('calibre', 12, 'bold'))
         xxxxl_blank_label.grid(row=21, column=0)
         xxxxl_blank_entry = tk.Entry(self, textvariable=self.xxxxl_blank, font=('calibre', 12, 'normal'), width=27)
         xxxxl_blank_entry.grid(row=21, column=1)
 
         self.xxxxxl_blank = tk.StringVar()
-        self.xxxxxl_blank.set("0.00")
         xxxxxl_blank_label = tk.Label(self, text='5XL Blank Price', font=('calibre', 12, 'bold'))
         xxxxxl_blank_label.grid(row=22, column=0)
         xxxxxl_blank_entry = tk.Entry(self, textvariable=self.xxxxxl_blank, font=('calibre', 12, 'normal'), width=27)
@@ -222,6 +203,8 @@ class quote_app(tk.Tk):
         sub_btn.grid(row=24, column=1)
         exit_button = tk.Button(self, text="Exit", command=self.destroy, width=10, padx=5, pady=5, height=1)
         exit_button.grid(row=25, column=1)
+
+        self.set_variables()
 
     def submit(self):
         self.count += 1
@@ -251,7 +234,10 @@ class quote_app(tk.Tk):
         self.total.append(grand_total)
         self.total_profit.append(profit)
         self.customer_class.add_quote(self.quote_name.get(), actual_quote)
+        self.set_variables()
+        self.quote_count.config(text="Quote #{}".format(self.count))
 
+    def set_variables(self):
         self.shirt_style.set("")
         self.quantity_break.set("72")
         self.s_xl_q.set("72")
@@ -274,4 +260,3 @@ class quote_app(tk.Tk):
         self.xxxxl_blank.set("0.00")
         self.xxxxxl_blank.set("0.00")
         self.quote_name.set("")
-        self.quote_count.config(text="Quote #{}".format(self.count))
