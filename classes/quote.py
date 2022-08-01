@@ -27,11 +27,15 @@ class Quote_info(Customer):
         self.shirt_price = shirt_price
         self.shirt_lizard_price_per_shirt = 1.21
         self.shirt_lizard_screen_charge = 34
-        self.quote = self.run_quote()
+        #self.quote = self.run_quote()
 
-    def run_quote(self):
-        front = pd.read_csv('/Users/WordApparel/PycharmProjects/QCSP_Auto_Quote/qcsp_prices/Front_Print.csv')
-        addl = pd.read_csv('/Users/WordApparel/PycharmProjects/QCSP_Auto_Quote/qcsp_prices/addl_print.csv')
+    def run_quote(self, front_price, addl_price):
+        self.front_price = front_price
+        self.addl_price = addl_price
+        front = pd.read_csv(front_price)
+        addl = pd.read_csv(addl_price)
+        # front = pd.read_csv('/Users/WordApparel/PycharmProjects/QCSP_Auto_Quote/qcsp_prices/Front_Print.csv')
+        # addl = pd.read_csv('/Users/WordApparel/PycharmProjects/QCSP_Auto_Quote/qcsp_prices/addl_print.csv')
         quote_dict = {}
         quote_dict['customer'] = self.name
         quote_dict['email'] = self.email

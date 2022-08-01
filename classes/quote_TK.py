@@ -4,6 +4,7 @@ from classes.quote import Quote_info
 
 class quote_app(tk.Tk):
     def __init__(self, count = 1, total = [], total_profit = [], df_name = None,
+                front = None, addl = None,
                 customer_class = None, due_date = None, shirt_style = None, quantity_break = None,
                 s_xl_q = None, xxl_q = None, xxxl_q = None, xxxxl_q = None, xxxxxl_q = None,
                 location1 = None, location2 = None, location3 = None, location4 = None,
@@ -20,6 +21,8 @@ class quote_app(tk.Tk):
         self.total_profit = total_profit
         self.df_name = df_name
         self.customer_class = customer_class
+        self.front = front
+        self.addl = addl
         self.due_date = due_date
         self.shirt_style = shirt_style
         self.quantity_break = quantity_break
@@ -228,7 +231,7 @@ class quote_app(tk.Tk):
                                 XXXL=float(self.xxxl_blank.get()), XXXXL=float(self.xxxxl_blank.get()),
                                 XXXXXL=float(self.xxxxxl_blank.get()), quantity_dict=quantity_dict_auto)
 
-        grand_total, profit, actual_quote = quote_info.run_quote()
+        grand_total, profit, actual_quote = quote_info.run_quote(front_price=self.front, addl_price=self.addl)
         quote_info.print_quote(actual_quote, file_name=self.df_name + '_quote',
                                dir='running_quotes/' + self.customer_class.name)
         self.total.append(grand_total)
