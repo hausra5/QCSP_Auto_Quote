@@ -70,7 +70,7 @@ class quote_app(tk.Tk):
         quantity_break_label.grid(row=3, column=0)
         quantity_break_entry = ttk.Combobox(self, textvariable=self.quantity_break, font=('calibre', 12, 'bold'),
                                             width=27)
-        quantity_break_entry['values'] = [12, 24, 72, 144, 288, 500, 1000, 2000]
+        quantity_break_entry['values'] = [12, 24, 48, 72, 144, 288, 500, 1000, 2000]
         quantity_break_entry['state'] = 'readonly'
         quantity_break_entry.grid(row=3, column=1)
 
