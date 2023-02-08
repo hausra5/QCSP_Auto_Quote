@@ -34,16 +34,30 @@ class Quote_info(Customer):
         self.addl_price = addl_price
         front = pd.read_csv(front_price)
         addl = pd.read_csv(addl_price)
-        # front = pd.read_csv('/Users/WordApparel/PycharmProjects/QCSP_Auto_Quote/qcsp_prices/Front_Print.csv')
-        # addl = pd.read_csv('/Users/WordApparel/PycharmProjects/QCSP_Auto_Quote/qcsp_prices/addl_print.csv')
         quote_dict = {}
         quote_dict['customer'] = self.name
         quote_dict['email'] = self.email
         quote_dict['phone'] = self.phone
         quote_dict['address'] = self.address
         quote_dict['due_date'] = self.due_date
+        quote_dict['shirt_style'] = self.shirt_style
+        quote_dict['description'] = self.description
         quote_dict['quantity'] = int(self.quantity)
         quote_dict['sizes'] = self.quantity_dict
+        quote_dict['S_Q'] = quote_dict['sizes']['S']
+        quote_dict['M_Q'] = quote_dict['sizes']['M']
+        quote_dict['L_Q'] = quote_dict['sizes']['L']
+        quote_dict['XL_Q'] = quote_dict['sizes']['XL']
+        quote_dict['S-XL_Q'] = quote_dict['sizes']['S'] + quote_dict['sizes']['M'] + quote_dict['sizes']['L'] \
+                               + quote_dict['sizes']['XL']
+        quote_dict['XXL_Q'] = quote_dict['sizes']['2XL']
+        quote_dict['XXXL_Q'] = quote_dict['sizes']['3XL']
+        quote_dict['XXXXL_Q'] = quote_dict['sizes']['4XL']
+        quote_dict['XXXXXL_Q'] = quote_dict['sizes']['5XL']
+        quote_dict['location_1'] = self.location1
+        quote_dict['location_2'] = self.location2
+        quote_dict['location_3'] = self.location3
+        quote_dict['location_4'] = self.location4
         quote_dict['S-XL_price'] = self.shirt_price
         quote_dict['XXL_price'] = self.XXL
         quote_dict['XXXL_price'] = self.XXXL
@@ -55,11 +69,11 @@ class Quote_info(Customer):
         quote_dict['shirt_lizard_price_per_shirt'] = self.shirt_lizard_price_per_shirt
         quote_dict['shirt_lizard_screen_charge'] = self.shirt_lizard_screen_charge
 
-        quote_dict['total_blank_cost'] = round(((quote_dict['S-XL_price']) * quote_dict['sizes']['S-XL']) +
-                                              (quote_dict['XXL_price'] * quote_dict['sizes']['XXL']) +
-                                              (quote_dict['XXXL_price'] * quote_dict['sizes']['XXXL']) +
-                                              (quote_dict['XXXXL_price'] * quote_dict['sizes']['XXXXL']) +
-                                              (quote_dict['XXXXXL_price'] * quote_dict['sizes']['XXXXXL']),2)
+        quote_dict['total_blank_cost'] = round(((quote_dict['S-XL_price']) * quote_dict['S-XL_Q']) +
+                                              (quote_dict['XXL_price'] * quote_dict['XXL_Q']) +
+                                              (quote_dict['XXXL_price'] * quote_dict['XXXL_Q']) +
+                                              (quote_dict['XXXXL_price'] * quote_dict['XXXXL_Q']) +
+                                              (quote_dict['XXXXXL_price'] * quote_dict['XXXXXL_Q']),2)
 
         def quote_dict_totals(addl2=0.0, addl3=0.0, addl4=0.0, locations=1):
             quote_dict['total_S-XL_price'] = round(
@@ -79,16 +93,16 @@ class Quote_info(Customer):
                     'XXXXXL_price'], 2)
 
             quote_dict['tax_total'] = round(
-                self.tax * (((quote_dict['total_S-XL_price']) * quote_dict['sizes']['S-XL']) +
-                            (quote_dict['total_XXL_price'] * quote_dict['sizes']['XXL']) +
-                            (quote_dict['total_XXXL_price'] * quote_dict['sizes']['XXXL']) +
-                            (quote_dict['total_XXXXL_price'] * quote_dict['sizes']['XXXXL']) +
-                            (quote_dict['total_XXXXXL_price'] * quote_dict['sizes']['XXXXXL'])), 2)
-            quote_dict['grand_total'] = round(((quote_dict['total_S-XL_price']) * quote_dict['sizes']['S-XL']) +
-                                              (quote_dict['total_XXL_price'] * quote_dict['sizes']['XXL']) +
-                                              (quote_dict['total_XXXL_price'] * quote_dict['sizes']['XXXL']) +
-                                              (quote_dict['total_XXXXL_price'] * quote_dict['sizes']['XXXXL']) +
-                                              (quote_dict['total_XXXXXL_price'] * quote_dict['sizes']['XXXXXL']) +
+                self.tax * (((quote_dict['total_S-XL_price']) * quote_dict['S-XL_Q']) +
+                            (quote_dict['total_XXL_price'] * quote_dict['XXL_Q']) +
+                            (quote_dict['total_XXXL_price'] * quote_dict['XXXL_Q']) +
+                            (quote_dict['total_XXXXL_price'] * quote_dict['XXXXL_Q']) +
+                            (quote_dict['total_XXXXXL_price'] * quote_dict['XXXXXL_Q'])), 2)
+            quote_dict['grand_total'] = round(((quote_dict['total_S-XL_price']) * quote_dict['S-XL_Q']) +
+                                              (quote_dict['total_XXL_price'] * quote_dict['XXL_Q']) +
+                                              (quote_dict['total_XXXL_price'] * quote_dict['XXXL_Q']) +
+                                              (quote_dict['total_XXXXL_price'] * quote_dict['XXXXL_Q']) +
+                                              (quote_dict['total_XXXXXL_price'] * quote_dict['XXXXXL_Q']) +
                                               (quote_dict['tax_total']), 2)
 
             quote_dict['shirt_lizard_cost'] = round(

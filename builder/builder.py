@@ -5,19 +5,20 @@ from classes.quote_TK import quote_app
 from write.write_quote import write_quote
 
 class builder:
-    def __init__(self, front_price,addl_price):
+    def __init__(self, front_price,addl_price, blank_template):
         # Create Customer Info Window
         self.CA = customer_app()
         self.CA.mainloop()
         self.front_price = front_price
         self.addl_price = addl_price
+        self.blank_template = blank_template
 
         # Create customer via Customer Class
         self.customer = Customer(self.CA.customer_name, self.CA.customer_email, self.CA.customer_phone,
                                  self.CA.customer_address)
 
         # Create directory for Customer
-        self.wq = write_quote(self.customer, self.CA.df_name)
+        self.wq = write_quote(self.customer, self.CA.df_name, self.CA.invoice_no)
 
         try:
             os.makedirs(os.path.join("running_quotes",self.customer.name))
@@ -34,3 +35,4 @@ class builder:
         # Save Output and Dataframe
         self.wq.write_quote_info(self.QA)
         self.wq.write_dataframe()
+        self.wq.write_invoice(self.QA, self.blank_template)
